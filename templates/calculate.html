@@ -13,6 +13,15 @@
 </head>
 
 <body>
+  <section id="logic">
+    <form method="POST" action="/add_card">
+      <input type="text" name="author" placeholder="Автор">
+      <input type="text" name="title" placeholder="Название">
+      <textarea name="content" placeholder="Описание"></textarea>
+      <button class="btn" type="submit" name="btn">Добавить</button>
+    </form>
+  </section>
+  <section id="content">
   <div class="posts">
   {% block content %}
     {% for post in posts %}
@@ -38,6 +47,7 @@
     {% endfor %}
   {% endblock %}
 </div>
+</section>
 </body>
 
 </html>

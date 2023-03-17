@@ -42,6 +42,23 @@ def add_card():
     return redirect('/')
 
 
+@app.route('/add_likes/<id>', methods=['POST'])
+def add_like(id):
+    for post in posts:
+        if str(post['id']) == str(id):
+            post['likes'] += 1
+    return redirect('/')
+
+
+@app.route('/add_dislikes/<id>', methods=['POST'])
+def add_dislike(id):
+    for post in posts:
+        if str(post['id']) == str(id):
+            print(post)
+            post['dislikes'] += 1
+    return redirect('/')
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run()

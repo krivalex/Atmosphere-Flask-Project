@@ -13,41 +13,51 @@
 </head>
 
 <body>
+
   <section id="logic">
-    <form method="POST" action="/add_card">
+    <h1>Добавим карточку</h1>
+    <form class="add_card" method="POST" action="/add_card">
       <input type="text" name="author" placeholder="Автор">
       <input type="text" name="title" placeholder="Название">
       <textarea name="content" placeholder="Описание"></textarea>
       <button class="btn" type="submit" name="btn">Добавить</button>
     </form>
   </section>
-  <section id="content">
-  <div class="posts">
-  {% block content %}
-    {% for post in posts %}
-      <div class="post">
-        <div class="heading">
-          <p class="id">{{ post.id }}</p>
-          <h3 class="author">{{ post.author }}</h3>
-        </div>
 
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.content }}</p>
-        <div class="marks">
-          <button class="graduate like">
-            <img class="mark" src="../static/like.png" alt="like">
-            <span>{{ post.likes }}</span>
-          </button>
-          <button class="graduate dislike">
-            <img class="mark" src="../static/dislike.png" alt="dislike">
-            <span>{{ post.dislikes }}</span>
-          </button>
+  <section id="content">
+    <div class="posts">
+    {% block content %}
+      {% for post in posts %}
+        <div class="post">
+
+          <p class="date">{{ post.date_posted }}</p>
+          <p class="time">{{ post.time_posted }}</p>
+          <div class="heading">
+            <p class="id">{{ post.id }}</p>
+            <h3 class="author">{{ post.author }}</h3>
+          </div>
+
+          <h1>{{ post.title }}</h1>
+          <p>{{ post.content }}</p>
+          <div class="marks">
+            <form method="POST" action="/add_likes/{{post.id}}">
+              <button class="graduate like" type="submit">
+                <img class="mark" src="../static/like.png" alt="like">
+                <span>{{ post.likes }}</span>
+              </button>
+            </form>
+            <form method="POST" action="/add_dislikes/{{post.id}}"></form>
+            <button class="graduate dislike" type="submit">
+              <img class="mark" src="../static/dislike.png" alt="dislike">
+              <span>{{ post.dislikes }}</span>
+            </button>
+            </form>
+          </div>
         </div>
-      </div>
-    {% endfor %}
-  {% endblock %}
-</div>
-</section>
+      {% endfor %}
+    {% endblock %}
+    </div>
+  </section>
 </body>
 
 </html>

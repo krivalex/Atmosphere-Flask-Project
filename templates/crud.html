@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../static/style.css">
+  <title>CRUD</title>
+</head>
+<body>
+  <div>
+    <form method="GET" action="/crud/get">
+      <input type="text" name="id" placeholder="ID">
+      <button type="submit">GET</button>
+    </form>
+    <form method="POST" action="/crud/post">
+      <input type="text" name="id" placeholder="ID">
+      <button type="submit">POST</button>
+    </form> 
+    <form method="PUT" action="/crud/put">
+      <input type="text" name="id" placeholder="ID">
+      <button type="submit">PUT</button>
+    </form>
+    <form method="DELETE" action="/crud/delete">
+      <input type="text" name="id" placeholder="ID">
+      <button type="submit">DELETE</button>
+    </form>
+  </div>
+
+    <section id="content">
+      <div class="posts">
+      {% block content %}
+        {% if post %}
+          <div class="post">
+  
+            <p class="date">{{ post.date_posted }}</p>
+            <p class="time">{{ post.time_posted }}</p>
+            <div class="heading">
+              <p class="id">{{ post.id }}</p>
+              <h3 class="author">{{ post.author }}</h3>
+            </div>
+  
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.content }}</p>
+            <div class="marks">
+              <form method="POST" action="/add_likes/{{post.id}}">
+                <button class="graduate like" type="submit">
+                  <img class="mark" src="../static/like.png" alt="like">
+                  <span>{{ post.likes }}</span>
+                </button>
+              </form>
+              <form method="POST" action="/add_dislikes/{{post.id}}"></form>
+              <button class="graduate dislike" type="submit">
+                <img class="mark" src="../static/dislike.png" alt="dislike">
+                <span>{{ post.dislikes }}</span>
+              </button>
+              </form>
+            </div>
+          </div>
+        {% endif %}
+      {% endblock %}
+      </div>
+    </section>
+
+
+  
+</body>
+</html>
